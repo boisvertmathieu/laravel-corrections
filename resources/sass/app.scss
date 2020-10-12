@@ -1,0 +1,228 @@
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "~bootstrap/scss/bootstrap";
+
+/* ------------------------*/
+/*       Custom CSS        */
+/* ------------------------*/
+
+// GENERAL & TYPOGRAPHY
+
+.headind-font {
+    font-family: $headings-font-family;
+}
+
+main > .container {
+    @extend .pt-2;
+    @extend .pb-5;
+}
+
+h1 {
+    @extend .mb-2;
+}
+
+// POSITIONNEMENT
+
+.col-tier {
+    @extend .col-md-6;
+    @extend .col-lg-4;
+    @extend .mb-3;
+}
+
+.col-2-tiers {
+    @extend .col-md-6;
+    @extend .col-lg-8;
+    @extend .mb-3;
+}
+
+.col-demi {
+    @extend .col-md-6;
+    @extend .mb-3;
+}
+
+// TABLE
+
+.td-big {
+    font-size: 2rem;
+    color: $dark;
+    @extend .headind-font;
+    @extend .text-center;
+}
+td.td-big {
+    @extend .align-middle;
+}
+
+.table {
+    @extend .table-bordered;
+    @extend .bg-white;
+    @extend .shadow-sm;
+    tfoot {
+        background-color: lighten($dark, 75);
+        th {
+            @extend .text-right;
+        }
+        td,
+        th {
+            @extend .td-big;
+            border-top-width: 3px;
+        }
+    }
+}
+
+// COMPOSANTES
+.entete-grille {
+    div {
+        @extend .d-flex;
+    }
+    span {
+        color: lighten($dark, 25);
+        @extend .h4;
+        @extend .mt-2;
+        @extend .ml-3;
+    }
+    strong {
+        font-weight: 800;
+    }
+    input {
+        @extend .rounded;
+        @extend .border;
+        border-color: $body-bg;
+        border-width: 0px !important;
+        background-color: transparent;
+        &:focus {
+            background-color: $light;
+            @extend .border-primary;
+        }
+    }
+    h1 input,
+    h1 input:focus {
+        @extend .h1;
+        width: 100%;
+    }
+    h2 {
+        @extend .h5;
+        @extend .mb-4;
+        @extend .d-flex;
+        input {
+            @extend .ml-1;
+            @extend .h5;
+            flex-grow: 1;
+        }
+    }
+}
+
+.card {
+    @extend .h-100;
+    @extend .mb-3;
+    @extend .pb-1;
+    @extend .shadow-sm;
+    &-body {
+        @extend .pb-0;
+    }
+    &-actions {
+        @extend .p-3;
+        form {
+            @extend .d-inline;
+        }
+    }
+}
+
+.competence, .note{
+    border: none;
+    &:focus {
+        border: 1px solid black;
+    }
+}
+
+.critere {
+    border-bottom: 1px solid black;
+    list-style: none;
+}
+
+.corrections {
+    background-color: white;
+    border: 0px solid #1C6EA4;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.ul-critere {
+    padding: 0;
+}
+
+.texte-critere {
+    display: inline-block;
+    margin: 5px 5px;
+}
+
+// FORMULAIRES
+
+.has-error {
+    .form-control {
+        @extend .border;
+        @extend .border-danger;
+    }
+    .help-block {
+        color: $danger;
+    }
+}
+
+.icon {
+    background: none;
+    border: none;
+}
+
+// HEADER // BREADCRUMB // FOOTER
+
+.navbar {
+    @extend .navbar-expand-md;
+    @extend .navbar-dark;
+    @extend .shadow;
+    @extend .bg-dark;
+    &-brand {
+        @extend .headind-font;
+    }
+    .navbar-nav .nav-link {
+        color: lighten($primary, 50);
+    }
+}
+
+.breadcrumb {
+    @extend .pl-0;
+    @extend .pb-0;
+    background: none;
+}
+
+.banner {
+    background-size: contain;
+    background-repeat: no-repeat;
+    @extend .row;
+    &-info {
+        @extend .col-sm-5;
+        padding: 20vh 0 30vh;
+    }
+}
+
+#welcome {
+    background-color: #00acb2;
+    @extend .pt-5;
+    @extend .text-light;
+    .banner {
+        background-position: center right;
+        background-image: url(../img/banner.png);
+        h1,
+        p {
+            text-shadow: 0 0.5px 5px rgba($dark, 0.8);
+        }
+    }
+}
+
+footer {
+    @extend .pt-3;
+    @extend .pb-3;
+    .container {
+        @extend .d-flex;
+        @extend .justify-content-between;
+    }
+}
