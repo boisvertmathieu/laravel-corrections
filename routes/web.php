@@ -25,7 +25,7 @@ Route::get('/', function () {
 Auth::routes();
 
 /* Route de l'accueil de l'espace authentifié (Mes grilles) */
-Route::get('/home', [GrilleController::class, 'index'])
+Route::get('/home/{tri}', [GrilleController::class, 'index'])
     ->name('home');
 
 /* Routes des ressources de base pour la grille */
@@ -84,11 +84,6 @@ Route::post('/importation/{id}', [CorrectionController::class, 'importationCSV']
 Route::post('/correction/{corr_id}/competence/{comp_id}/note/{note_id?}', [CorrectionController::class, 'updateNote'])
     ->middleware('auth')
     ->name('updateNote');
-
-// Route::post('/correction/{corr_id}/competence/{comp_id}/note/{note_id?}', [CorrectionController::class, 'selectNote'])
-//     ->middleware('auth')
-//     ->name('selectNote');
-
 
 /*
 ATTENTION : afin de retirer des routes erronées

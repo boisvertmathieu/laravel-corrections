@@ -111,7 +111,7 @@
                         {{-- Affiche du total de la pondération--}}
                         <span>{{ $grille->getTotalPoints($grille->id) }}</span>
                     </td>
-                    <td>{{ $total }}</td>
+                    <td id="noteTotal">{{ $total }}</td>
                     <td></td>
                 </tr>
                 </tfoot>

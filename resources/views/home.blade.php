@@ -40,6 +40,46 @@
                 </div>
             </form>
         </div>
+        <form id="tri" method="get" action="{{ route('home') }}">
+        @csrf
+            <label>Trier par:</label>
+            <select name="selectTri" id="selectTri" form="tri" 
+                onchange="this.form.submit()">
+                <option
+                    @if($optionTri == "nom")
+                    selected="selected"
+                    @endif
+                    value="nom">Nom
+                </option>
+                <option
+                    @if($optionTri == "updated_at")
+                    selected="selected"
+                    @endif
+                    value="updated_at">Date de modification
+                </option>
+                <option
+                    @if($optionTri == "created_at")
+                    selected="selected"
+                    @endif
+                    value="created_at">Date de création
+                </option>
+            </select>
+            <select name="directionTri" id="directionTri" form="tri"
+                onchange="this.form.submit()">
+                <option
+                    @if($directionTri == "Asc")
+                    selected="selected"
+                    @endif
+                    value="Asc">Asc
+                </option>
+                <option
+                    @if($directionTri == "Desc")
+                    selected="selected"
+                    @endif
+                    value="Desc">Desc
+                </option>
+            </select>
+        </form>
     </div>
 
     <section id="mesGrilles" class="row">
@@ -47,7 +87,7 @@
         <div class="grille col-tier">
             <div class="card">
                 <div class="card-body">
-                    <h2 class="h4">{{$grille->nom}}</h2>
+                    <h2 id="nomGrille" class="h4">{{$grille->nom}}</h2>
                     <p><strong>Cours:</strong> {{$grille->cours}}</p>
                     <p>
                         <div>

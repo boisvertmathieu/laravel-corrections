@@ -6,7 +6,11 @@
         @if ($errors->any())
             <div class="alert alert-danger" role="alert">
                 Veuillez régler les erreurs suivantes
-                {{$errors}}
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{$error}}</li>
+                    @endforeach
+                </ul>
             </div>
         @endif
 
@@ -126,7 +130,7 @@
                     </th>
                     <td>
                         {{-- Affiche du total de la pondération--}}
-                        <span>{{ $grille->getTotalPoints($grille->id) }}</span>
+                        <span id="total-ponderation">{{ $grille->getTotalPoints($grille->id) }}</span>
                     </td>
                     <td></td>
                     <td></td>
@@ -152,7 +156,8 @@
                     </div>
                     <div class="col-sm-2">
                         <label for="ponderation">Pondération</label>
-                        <input id="createPondComp" type="number" name="ponderation" class="form-control" placeholder="Pondération"/>
+                        <input id="createPondComp" type="number" name="ponderation" class="form-control"
+                               placeholder="Pondération"/>
                     </div>
                     <input id="ajoutComp" type="submit" class="btn btn-primary" value="Envoyez"/>
                 </div>
@@ -162,9 +167,10 @@
         <!-- Section pour l'ajout de correction à la grille -->
         <section id="sect-corrections">
             <div class="pt-4">
-                <form action="{{ route('importationCSV', [$grille->id]) }}" enctype="multipart/form-data" method="post" class="form-inline float-right">
+                <form action="{{ route('importationCSV', [$grille->id]) }}" enctype="multipart/form-data" method="post"
+                      class="form-inline float-right">
                     <input type="file" name="fichier" id="fichier" required/>
-                    <button type="submit" class="btn btn-dark">Importer le fichier</button>
+                    <button type="submit" class="btn btn-dark" id="btnImporterCorrections">Importer le fichier</button>
                     {{csrf_field()}}
                 </form>
                 <h2>Ajouter une correction</h2>
@@ -176,14 +182,15 @@
                             {{ $correction->da . " - " . $correction->nom . ", " . $correction->prenom }}
                         </div>
                         <div class="col-md-2 d-flex flex-row justify-content-start">
-                            <form class="p-1" action="{{ route('showDetails', [$grille->id, $correction->id]) }}" method="get">
-                                <input type="submit" class="btn btn-primary" value="Corriger"/>
+                            <form class="p-1" action="{{ route('showDetails', [$grille->id, $correction->id]) }}"
+                                  method="get">
+                                <input id="corrigerCorrection" type="submit" class="btn btn-primary" value="Corriger"/>
                             </form>
                             <form class="p-1" action="{{ route('destroyCorrection', [$correction->id]) }}"
                                   method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"
+                                <button type="submit" class="btn btn-danger" id="supprCorrection"><i class="fa fa-trash"
                                                                                 aria-hidden="true"></i></button>
                             </form>
                         </div>
@@ -196,15 +203,18 @@
                 <div class="row form-group">
                     <div class="col-md">
                         <label for="correction-nom">Nom: </label>
-                        <input id="correction-nom" type="text" name="correction-nom" class="form-control" placeholder="Nom"/>
+                        <input id="correction-nom" type="text" name="correction-nom" class="form-control"
+                               placeholder="Nom"/>
                     </div>
                     <div class="col-md">
                         <label for="correction-prenom">Prénom: </label>
-                        <input id="correction-prenom" type="text" name="correction-prenom" class="form-control" placeholder="Prénom"/>
+                        <input id="correction-prenom" type="text" name="correction-prenom" class="form-control"
+                               placeholder="Prénom"/>
                     </div>
                     <div class="col-sm-2">
                         <label for="correction-da">DA: </label>
-                        <input id="correction-da" type="number" name="correction-da" class="form-control" placeholder="DA"/>
+                        <input id="correction-da" type="number" name="correction-da" class="form-control"
+                               placeholder="DA"/>
                     </div>
                     <input id="ajoutCorrection" type="submit" class="btn btn-primary" value="Envoyez"/>
                 </div>

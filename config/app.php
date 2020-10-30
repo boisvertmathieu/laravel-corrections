@@ -162,9 +162,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        //Permettant l'importation de fichiers csv
-        Maatwebsite\Excel\ExcelServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
@@ -229,9 +226,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        //Permettant l'importation de fichiers csv
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 

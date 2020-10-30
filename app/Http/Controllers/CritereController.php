@@ -33,6 +33,10 @@ class CritereController extends Controller
         return view('grille', compact('criteres'));
     }
 
+    /**
+     * Permet de retourner tous les critères pour une compétence, dont l'id de la compétence correspond
+     * à celui en paramètre
+     */
     public static function show($id)
     {
         $criteres = Critere::where('competence_id', '=', $id)
@@ -42,6 +46,9 @@ class CritereController extends Controller
         return $criteres;
     }
 
+    /**
+     * Permet de créer un critère pour une compétence et de l'insérer dans la bd
+     */
     public function createCritere(Request $request, $competence_id)
     {
         $request->validate([
@@ -61,20 +68,15 @@ class CritereController extends Controller
         return redirect(route('grille.show', $competence->grille_id));
     }
 
-        /**
-     * Supression d'une compétence.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id_grille
-     * @param int $id_critere
-     * @return \Illuminate\Http\Response
+    /**
+     * Permet de supprimer un critère dont l'id correspond à celui en paramètre
      */
     public function destroy($idCritere)
     {
         $critere = Critere::findOrFail($idCritere);
         $competence = Competence::findOrFail($critere->competence_id);
         $critere->delete();
-        
+
         return redirect(route('grille.show', $competence->grille_id));
     }
 }

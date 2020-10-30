@@ -7769,7 +7769,7 @@ button.navbar:focus {
   border-radius: 0.2rem !important;
 }
 
-.rounded, .entete-grille input {
+.rounded, select, .entete-grille input {
   border-radius: 0.25rem !important;
 }
 
@@ -11586,6 +11586,11 @@ h3 {
 .icon {
   background: none;
   border: none;
+}
+
+select {
+  padding: 5px;
+  margin: 5px;
 }
 
 .navbar .navbar-nav .nav-link {

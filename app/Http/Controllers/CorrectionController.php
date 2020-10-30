@@ -36,6 +36,9 @@ class CorrectionController extends Controller
         return view('grille', compact('corrections'));
     }
 
+    /**
+     * Retourne toute les corrections dont l'id de la grille correspond à l'id en paramètre
+     */
     public static function show($id)
     {
         $correction = Correction::where('grille_id', '=', $id)
@@ -45,6 +48,9 @@ class CorrectionController extends Controller
         return $correction;
     }
 
+    /**
+     * Permet d'afficher les détails d'une correction
+     */
     public function showDetails($grilleId, $correctionId)
     {
         $grille = Grille::findOrFail($grilleId);
@@ -66,6 +72,9 @@ class CorrectionController extends Controller
         return view('correction', compact('grille', 'competences', 'correction', 'notes', 'listeCriteres'));
     }
 
+    /**
+     * Permet de créer une correction et de l'insérer dans la bd
+     */
     public function createCorrection(Request $request, $grille_id)
     {
         $request->validate([
@@ -85,6 +94,9 @@ class CorrectionController extends Controller
         return redirect(route('grille.show', $grille_id));
     }
 
+    /**
+     * Permet de mettre à jour une note d'une correction
+     */
     public function updateNote(Request $request, $idCorrection, $idCompetence, $idNote = null)
     {
 
@@ -136,12 +148,9 @@ class CorrectionController extends Controller
         return redirect(route('showDetails', [$correction->grille_id, $correction->id]));
     }
 
-    public function selectNote($idNote, $note)
-    {
-        $note = Note::findOrFail($idNote);
-        $note->note = $note;
-    }
-
+    /**
+     * Permet de supprimer une correction de la bd selon l'id de la correction en paramètre
+     */
     public function destroy($id)
     {
         $correction = Correction::findOrFail($id);
@@ -151,6 +160,9 @@ class CorrectionController extends Controller
         return redirect(route('grille.show', $grille->id));
     }
 
+    /**
+     * Permet d'importer un fichier csv contenant plusieurs corrections à ajouter à la bd
+     */
     public function importationCSV(Request $request, $grille_id)
     {
         //Validation du fichier en request

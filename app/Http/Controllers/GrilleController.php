@@ -24,24 +24,33 @@ class GrilleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $user = Auth::user();
+        if($request->selectTri != null)
+        {
+            $optionTri = $request->selectTri;
+        }
+        else
+        {
+            $optionTri = 'updated_at';
+        }
+        if($request->directionTri)
+        {
+            $directionTri = $request->directionTri;
+        }
+        else
+        {
+            $directionTri = 'Desc';
+        }
+        
         $grilles = Grille::where('user_id', '=', $user->id)
-            ->orderBy('updated_at', 'desc')
+            ->orderBy($optionTri, $directionTri)
             ->paginate(6);
-        return view('home', compact('grilles'));
-    }
 
-    /**
-     * Affichage du formulaire de création d'une grille
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        // Formulaire de création dans la vue home
+        $grilles->appends(request()->except('page'));
+        return view('home', compact('grilles', 'optionTri', 'directionTri'));
     }
 
     /**
@@ -94,17 +103,6 @@ class GrilleController extends Controller
             ->get();
 
         return view('grille', compact('grille', 'competences', 'listeCriteres', 'corrections'));
-    }
-
-    /**
-     * Affichage du formulaire de modification d'une grille
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        // À même la grille
     }
 
     /**

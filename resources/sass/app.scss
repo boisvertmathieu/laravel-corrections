@@ -176,6 +176,12 @@ td.td-big {
     border: none;
 }
 
+select {
+    @extend .rounded;
+    padding: 5px;
+    margin: 5px;
+}
+
 // HEADER // BREADCRUMB // FOOTER
 
 .navbar {
